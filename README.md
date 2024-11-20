@@ -3,15 +3,14 @@ This repo contains the files for the PCMLAI Module 11 Practical Assignment 2
 
 ## What drives the price of a car?
 
-![Picture of Kurt](https://github.com/user-attachments/assets/27980b03-6087-4cfe-8611-bb02b07c0e3a)
-
+![Picture of Kurt](https://github.com/user-attachments/assets/68fb26e8-0b92-4449-a997-9a830b57a282)
 
 ### Overview
 In this application, you will explore a dataset from Kaggle. The original dataset contained information on 3 million used cars. The provided dataset contains information on 426K cars to ensure speed of processing.  Your goal is to understand what factors make a car more or less expensive.  As a result of your analysis, you should provide clear recommendations to your client -- a used car dealership -- as to what consumers value in a used car.
 
 ### CRISP-DM Framework
 
-![CRISP-DM Framework](https://github.com/user-attachments/assets/6bd08d0d-b418-4078-9537-ce75fb58c505)
+![CRISP-DM Framework](https://github.com/user-attachments/assets/acab5b1c-4b7d-40d0-9d71-00e234a5827f)
 
 ### Business Understanding
 From a business perspective, we are tasked with identifying key drivers for used car prices.  In the CRISP-DM overview, we are asked to convert this business framing to a data problem definition.  Using a few sentences, reframe the task as a data task with the appropriate technical vocabulary. 
@@ -31,7 +30,7 @@ After considering the business understanding, we want to get familiar with our d
 2. **Describe the Data**: This dataset has 426k columns and 18 rows. These rows include attributes about the used cars. The features are id, region, price, year, manufacturer, model, condition, cylinders, fuel, odometer, title status, transmission, VIN, drive, size, type, paint color, and state.
 3. **Explore the Data**: There are features that are likely to affect the price of a used car more than others. For example, the VIN number has no effect on the price of a car as it is only an identification number. The same can be said about the id column as it is simply just a way to identify the transaction for the car. Features like year, odometer, and condition are likely to have more of an effect on the price. A heatmap of the correlation between the numeric features (price, year, and odometer) shows that the odometer has more of a correlation to the price than the year does. This is because the odometer-to-price correlation is 0.01 and the year-to-price correlation is -0.0049. The odometer correlation is closer to 1 than the year correlation is to -1.
 
-   ![Correlation of Numeric Features](https://github.com/user-attachments/assets/bfd9de5c-fbcb-41f9-98ac-357ab97cdc53)
+![Correlation of Numeric Features](https://github.com/user-attachments/assets/c9313282-211e-4d1b-8041-e282b0e43cb2)
 
 4. **Verify data quality**: The data isn't very clean and will need data cleaning. There are a lot of missing data points that will need to be either deleted or filled with the column mode during data cleaning. There are also columns that can be deleted as they have no impact on the price of the car, like the VIN. There are also a few outliers, like significantly high prices and mileage, that must be dealt with.
 
@@ -45,25 +44,25 @@ With your (almost?) final dataset in hand, it is now time to build some models. 
 
 I first reduced the dataset to include only the data that will be used during modeling (price, year, odometer, and condition (excellent, fair, good, like new, new, salvage)).
 
-![Cars with dummies table](https://github.com/user-attachments/assets/0a9b6f49-95fe-4939-a1ba-cd8f4b1d0e4c)
+![Cars with dummies table](https://github.com/user-attachments/assets/5af6f25e-64a6-44d4-acb9-08148524c1ab)
 
 After splitting the data into two sets randomly, I created 5 different models.
 
 1. **Linear Regression Model**: This model used the odometer feature to predict the price. However, for such a complex situation, using just one feature does not accurately predict price. Therefore, this model had a very high mean squared error (MSE) at 427469852.9022362. The one feature is not enough to predict the complex price as shown in this plot.
 
-![Actual vs Predicted Data for Simple Linear Regression](https://github.com/user-attachments/assets/a4fc726c-2909-402d-b3c9-05e30790ef88)
+![Actual vs Predicted Data for Simple Linear Regression](https://github.com/user-attachments/assets/d7bfc26f-d8c7-4855-ba3c-4cffbca5dd75)
 
 2. **Multiple Linear Regression Model With 2 Features**: This model used the odometer and year features to predict price. This model did have less error compared to the linear regression model. However, it was not the best model. This model's MSE is 136340161.13806883.
 
-![Actual and Predicted Data with Multiple Regression Model (2 Features](https://github.com/user-attachments/assets/0beb28e2-0657-4b91-8a52-0c5023aebe7b)
+![Actual and Predicted Data with Multiple Regression Model (2 Features)](https://github.com/user-attachments/assets/9d08142a-a54e-4088-a08b-fe5f8012a940)
 
 3. **Multiple Linear Regression Model With 3 Features**: This model used the odometer, year, and condition features to predict price. It should be noted that the condition feature was deleted and expanded so that each value was given its own column. The MSE was at 10330032087.24176.
-
-![Actual and Predicted Data with Multiple Regression Model (3 Features)](https://github.com/user-attachments/assets/2a8853e8-7f29-4c2b-aec3-aa2a0b7329d4)
+4. 
+![Actual and Predicted Data with Multiple Regression Model (3 Features)](https://github.com/user-attachments/assets/fa896d10-78cd-44b5-88c0-e56fbb574635)
 
 4. **LASSO Regression Model on Polynomial Features (Degree 2)**: This model used and squared the odometer and year features to degree 2 to predict price. This model did have less error compared to the linear regression model and multiple linear regression model with 2 features. However, it was not the best model. This model's MSE is 131124884.60776417
 
-![Actual and Predicted Data with LASSO Regression](https://github.com/user-attachments/assets/28dcaaeb-3e18-46cb-9599-83e3bee01b2c)
+![Actual and Predicted Data with LASSO Regression](https://github.com/user-attachments/assets/5a0d5f64-0dba-4627-b28a-6eb1399d2d44)
 
 5. **Ridge Regression Model on Polynomial Features (Degree 3) Using GridSearchCV**: This model used and cubed the odometer and year features to degree 2 to predict price. This was not the best model as this model only uses year and odometer to predict price. For a situation this complex, more features need to be included for better accuracy.
 
@@ -86,7 +85,7 @@ Now that we've settled on our models and findings, it is time to deliver the inf
 
 After extensively altering the data in a way that allowed for easier analysis and modeling, the best model was found. This model should predict the price based on the used car's year, odometer, and condition as they significantly affect the price of the used car. Based on the correlation to the price, the order of importance can be found. The odometer seems to be the most important with the price being the next in importance. When it comes down to the specific condition, customers seem to prefer a "good" used car over other conditions. Therefore, a used car with a high price should have fewer miles, be newer, and be in good condition. Although all the features in the dataset affect the price in some way (aside from the id and VIN), not all the features should be used when predicting price. Using the most important features allows accuracy and flexibility. Finding a good balance between numerical and nonnumerical features is important. So far, using the odometer, year, and condition features seems to be the "best" balance. For now, pricing can be predicted based on odometer, year, and condition. Variety in these features will result in varying prices. When it comes to inventory, the dealership should focus on buying cars that don't have too many miles, are fairly new (in terms of year), and are in good condition. Used cars that fall within this criterion are likely to be reasonably priced for customers and profitable for the dealership. These cars may even be able to be sold at slightly higher prices than predicted considering car prices are negotiable and this criterion is what customers look for most in a used car. Used cars that fall too far above or below this criterion may result in cars priced too low for the dealership to make a profit or too high for customers to afford. Accurate pricing is important as it encourages customers to choose this dealership over other dealerships; therefore, prices must be competitive yet profitable.
 
-![Correlation of Features in Final Dataset](https://github.com/user-attachments/assets/878b25d4-3ff4-4e10-8975-18e9386f6817)
+![Correlation of Features in Final Dataset](https://github.com/user-attachments/assets/50ebc4ed-7592-4c3b-9b1e-9f26f68b21d6)
 
 ### Next Steps
 
@@ -94,4 +93,4 @@ The next step would be to redo the data collection step. There are too many miss
 
 If the dealership owner wishes to use the dataset as is and avoid further data collection. The next step would be using the current model (multiple linear regression model with 3 features) to predict the prices of the used cars in the dealership currently. It may be beneficial to do further modeling. This can be done with other nonnumerical features like region, fuel, or cylinders. Considering further modeling with nonnumerical features requires the nonnumerical values to be turned into numerical columns, this process would be tedious as turning all of the nonnumerical features into numerical ones is too much for most computers considering the current dataset is already pretty large. Other ways of making the nonnumerical values numerical may be more beneficial as the current method is computationally expensive. Nonetheless, it is beneficial to the used car dealership, in the long run, to find the perfect balance of numerical and nonnumerical features for predicting the price after better data collection and cleaning.
 
-The link to the Jupyter Notebook with the coding for this project can be found [here](https://github.com/nadiaspn0503/Module-11-Practical-Application-2/blob/main/prompt_II.ipynb).
+The link to the Jupyter Notebook with the coding for this project can be found [here](https://github.com/nadiaspn0503/Module-11-Practical-Assignment/blob/main/prompt_II.ipynb).
